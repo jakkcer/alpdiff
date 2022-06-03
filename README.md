@@ -1,24 +1,29 @@
 # alpdiff
-show differences between two alp results
+show differences between two [alp](https://github.com/tkuchiki/alp) results
 
 ## Installation
-clone this repo or copy alpdiff (binary)
+### Prerequesties
+[alp](https://github.com/tkuchiki/alp) needed for alpdiff
+
+### Binary distribution
+You can pick your download [here](https://github.com/jakkcer/alpdiff/releases), and install it as follows:
+```sh
+sudo install <download file> /usr/local/bin/alpdiff
+```
 
 ## Usage
 ```sh
-$ ./alpdiff --help
-Usage of ./alpdiff:
+$ alpdiff --help
+Usage: alpdiff <old log file> <new log file> [<flags>]
+
+Flags:
   -m string
       same as alp -m option
-  -new string
-      new log file path to profile with alp
-  -old string
-      old log file path to profile with alp
 ```
 
 ### Example
 ```sh
-$ ./alpdiff -old example_log/ltsv_access.log -new example_log/new_ltsv_access.log -m "/diary/entry/\d+"
+$ ./alpdiff example_log/ltsv_access.log example_log/new_ltsv_access.log -m "/diary/entry/\d+"
 +-------+-----+-----+-----+-----+-----+--------+------------------+---------+---------+---------+---------+---------+---------+---------+
 | COUNT | 1XX | 2XX | 3XX | 4XX | 5XX | METHOD |       URI        |   MIN   |   MAX   |   SUM   |   AVG   |   P90   |   P95   |   P99   |
 +-------+-----+-----+-----+-----+-----+--------+------------------+---------+---------+---------+---------+---------+---------+---------+
