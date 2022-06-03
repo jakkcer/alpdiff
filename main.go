@@ -28,14 +28,10 @@ type AlpContent struct {
 }
 
 var (
-	oldLogFile string
-	newLogFile string
-	alpFormat  string
+	alpFormat string
 )
 
 func init() {
-	flag.StringVar(&oldLogFile, "old", "", "alpで解析する古いログファイルのパス")
-	flag.StringVar(&newLogFile, "new", "", "alpで解析する新しいログファイルのパス")
 	flag.StringVar(&alpFormat, "m", "", "alpの-mオプションに渡す値")
 }
 
@@ -178,10 +174,30 @@ func printAlpDiff(header, printOrder []string, diffMap map[string]AlpContent) {
 	table.Render()
 }
 
+func getLogFiles(args []string) (string, string, error) {
+	if len(args) < 2 {
+		return "", "", fmt.Errorf("Error: please pass two args as `./alpdiff <old_log_file> <new_log_file>`")
+	}
+	isFileExists := func(filepath string) bool {
+		_, err := os.Stat(filepath)
+		return err == nil
+	}
+	oldLogFile := args[0]
+	newLogFile := args[1]
+	if !isFileExists(oldLogFile) {
+		return "", "", fmt.Errorf("Error: %s does not exist", oldLogFile)
+	} else if !isFileExists(newLogFile) {
+		return "", "", fmt.Errorf("Error: %s does not exist", newLogFile)
+	}
+	return oldLogFile, newLogFile, nil
+}
+
 func main() {
 	flag.Parse()
-	if oldLogFile == "" || newLogFile == "" {
-		fmt.Println("Error: 引数で解析対象のログファイルのパスを2つ指定してください")
+
+	oldLogFile, newLogFile, err := getLogFiles(flag.Args())
+	if err != nil {
+		fmt.Println(err)
 		return
 	}
 
