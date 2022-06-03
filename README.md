@@ -1,12 +1,12 @@
 # alpdiff
-show differences between two alp results
+show differences between two [alp](https://github.com/tkuchiki/alp) results
 
 ## Installation
 ### Prerequesties
-(alp)[https://github.com/tkuchiki/alp] needed for alpdiff
+[alp](https://github.com/tkuchiki/alp) needed for alpdiff
 
 ### Binary distribution
-You can pick your download (here)[https://github.com/jakkcer/alpdiff/releases], and install it as follows:
+You can pick your download [here](https://github.com/jakkcer/alpdiff/releases), and install it as follows:
 ```sh
 sudo install <download file> /usr/local/bin/alpdiff
 ```
