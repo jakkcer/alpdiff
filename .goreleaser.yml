@@ -7,7 +7,6 @@ builds:
       - amd64
       - arm64
       - 386
-
 archives:
   - replacements:
       darwin: darwin
@@ -18,3 +17,5 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
+nfpms:
+  - file_name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
